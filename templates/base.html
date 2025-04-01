@@ -28,6 +28,13 @@
           opacity: 0;
           visibility: hidden;
         }
+
+        .glow-text {
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 12px rgba(255, 100, 0, 0.4);
+          font-size: 1.8rem;
+          letter-spacing: 1px;
+        }
+
     </style>
     <title>밈 메이커</title>
 </head>
@@ -47,13 +54,14 @@
       </button>
 
     <!-- 제목 (모바일 중앙, 데스크탑 왼쪽) -->
-    <a class="navbar-brand fw-bold text-light d-none d-lg-block" href="#">
-        밈 메이커
-      </a>
+    <a class="navbar-brand fw-bold d-none d-lg-block text-white glow-text" href="/">
+      밈 메이커
+    </a>
+    
   
     <!-- 모바일 전용 중앙 제목 -->
     <div class="mobile-title position-absolute top-50 start-50 translate-middle d-block d-lg-none">
-        <a class="navbar-brand fw-bold text-light" href="#" style="font-size: 1.25rem;">
+        <a class="navbar-brand fw-bold text-light" href="/" style="font-size: 1.25rem;">
           밈 메이커
         </a>
       </div>
@@ -62,10 +70,9 @@
       <!-- 네비게이션 링크 -->
       <div class="collapse navbar-collapse justify-content-between" id="mainNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">🌐 탐색</a></li>
-          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">📄 소개</a></li>
-          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">🐶 꽁꽁 얼어붙은 한강</a></li>
-          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">😺 고양이가 걸어다닙니다</a></li>
+          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">🌐 메인</a></li>
+          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/community">👥 커뮤니티</a></li>
+          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/cat">😺 꽁꽁 얼어붙은 한강 위로 고양이가 걸어다닙니다</a></li>
         </ul>
       </div>
 
