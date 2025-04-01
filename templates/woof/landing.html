@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+<main class="container my-3">
+
+  <!-- 2. 예시 이미지 -->
+  <div class="text-center mb-3">
+    <img src="/static/base.png" alt="예시 이미지" class="img-fluid example-image rounded border" style="max-height: 540px;">
+  </div>
+
+  <!-- 3~5. 폼 입력 및 버튼 -->
+  <form method="post" enctype="multipart/form-data" class="p-4 rounded" style="
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: #f5f5f5;">
+    {% csrf_token %}
+  
+    <!-- 문구 입력 -->
+    <div class="mb-4">
+      <label for="id_text" class="form-label">말풍선에 들어갈 글</label>
+      {{ form.text|add_class:"form-control" }}
+    </div>
+  
+    <!-- 이미지 업로드 -->
+    <div class="mb-4">
+      <label for="id_overlay_image_1" class="form-label">당하는 편 이미지</label>
+      {{ form.overlay_image_1|add_class:"form-control" }}
+    </div>
+
+    <div class="mb-4">
+      <label for="id_overlay_image_2" class="form-label">공격하는 강아지 머리</label>
+      {{ form.overlay_image_2|add_class:"form-control" }}
+    </div>
+  
+    <!-- 생성 버튼 -->
+    <div class="text-end">
+      <button type="submit" class="btn btn-lg px-4"
+        style="background-color: #6A0DAD; color: white;">나만의 이미지 만들기</button>
+    </div>
+  </form>
+
+  <!-- 결과 이미지 표시 -->
+  {% if image_path %}
+    <div class="mt-5 text-center">
+      <h4 class="mb-3">생성된 이미지:</h4>
+      <img src="{{ image_path }}" alt="생성 이미지" class="img-fluid border rounded">
+    </div>
+  {% endif %}
+</main>
+{% endblock %}

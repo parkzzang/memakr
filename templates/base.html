@@ -1,0 +1,129 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- Custom Font -->
+    <style>
+        @font-face {
+            font-family: 'NotoSansKR-SemiBold';
+            src: url("{% static 'fonts/NotoSansKR-SemiBold.ttf' %}") format('truetype');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'NotoSansKR-SemiBold', sans-serif;
+        }
+
+        .mobile-title {
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+    
+        .mobile-title.hide {
+          opacity: 0;
+          visibility: hidden;
+        }
+    </style>
+    <title>밈 메이커</title>
+</head>
+<body>
+<!-- ✅ 반응형 헤더 with 햄버거 메뉴 -->
+<nav class="navbar navbar-expand-lg" style="
+  background: linear-gradient(90deg, #7A5DC7, #A084CA);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+">
+
+    <div class="container">
+  
+      <!-- 1. 왼쪽: 햄버거 버튼 (모바일용) -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <!-- 제목 (모바일 중앙, 데스크탑 왼쪽) -->
+    <a class="navbar-brand fw-bold text-light d-none d-lg-block" href="#">
+        밈 메이커
+      </a>
+  
+    <!-- 모바일 전용 중앙 제목 -->
+    <div class="mobile-title position-absolute top-50 start-50 translate-middle d-block d-lg-none">
+        <a class="navbar-brand fw-bold text-light" href="#" style="font-size: 1.25rem;">
+          밈 메이커
+        </a>
+      </div>
+  
+  
+      <!-- 네비게이션 링크 -->
+      <div class="collapse navbar-collapse justify-content-between" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">🌐 탐색</a></li>
+          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">📄 소개</a></li>
+          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">🐶 꽁꽁 얼어붙은 한강</a></li>
+          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">😺 고양이가 걸어다닙니다</a></li>
+        </ul>
+      </div>
+
+      <!-- 언어 선택 -->
+      <form id="langSelect" class="mobile-title">
+        <select class="form-select w-auto rounded-pill shadow-sm" style="min-width: 100px;">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="jp">日本語</option>
+          <option value="zh">中文</option>
+        </select>
+      </form>
+      
+    </div>
+  </nav>
+  
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+{% block content %}
+{% endblock %}
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+    <!-- 6. 푸터 -->
+    <footer class="container text-center py-4 mt-5 border-top">
+       <div class="dev-info text-muted">
+         &copy; 2025 | sechan
+       </div>
+     </footer>
+
+     <!-- ✅ Bootstrap JS (선택사항) -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const navCollapse = document.getElementById('mainNav');
+        const mobileTitle = document.querySelector('.mobile-title');
+        const langSelect = document.getElementById('langSelect');
+    
+        navCollapse.addEventListener('show.bs.collapse', function () {
+          mobileTitle.classList.add('hide');
+          langSelect.classList.add('d-none');
+        });
+    
+        navCollapse.addEventListener('hidden.bs.collapse', function () {
+          // 1. d-none 제거 → 다시 DOM에 보이게
+          langSelect.classList.remove('d-none');
+    
+          // 2. 즉시 opacity: 0 상태 유지 (hide 유지)
+          langSelect.classList.add('hide');
+    
+          // 3. 다음 프레임에서 hide 제거 → 트랜지션 발생
+          setTimeout(() => {
+            langSelect.classList.remove('hide');
+          }, 5);
+        });
+    
+        navCollapse.addEventListener('hide.bs.collapse', function () {
+          mobileTitle.classList.remove('hide');
+        });
+      });
+    </script>
+    
+</body>
+</html>
