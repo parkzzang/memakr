@@ -24,6 +24,7 @@ from woof import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('woof/', include('woof.urls')),
+    path('bling/', include('bling.urls'))
 ]
 
 if settings.DEBUG:

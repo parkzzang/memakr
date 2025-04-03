@@ -1,7 +1,7 @@
 from django import forms
 
 class ImageForm(forms.Form):
-    text = forms.CharField(
+    text_1 = forms.CharField(
         max_length=100,
         required=False,
         label='문구 입력',
@@ -11,17 +11,19 @@ class ImageForm(forms.Form):
         })
     )
 
-    overlay_image_1 = forms.ImageField(
+    text_2 = forms.CharField(
+        max_length=100,
         required=False,
-        label='당하는 편 이미지 업로드',
-        widget=forms.ClearableFileInput(attrs={
+        label='문구 입력',
+        widget=forms.TextInput(attrs={
+            'placeholder': '',
             'class': 'form-control'
         })
     )
 
-    overlay_image_2 = forms.ImageField(
+    overlay_image = forms.ImageField(
         required=False,
-        label='공격하는 강아지 머리 이미지 업로드',
+        label='드레이크 몸통 이미지 업로드',
         widget=forms.ClearableFileInput(attrs={
             'class': 'form-control'
         })

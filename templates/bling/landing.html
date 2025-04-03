@@ -4,11 +4,11 @@
 <main class="container my-3">
 
   <!-- 제목 -->
-  <h4 class="mb-2 text-center">나쁜 답변 좋은 답변</h4>
-  
-    <!-- 2. 예시 이미지 -->
+  <h4 class="mb-2 text-center">드레이크 Hotline Bling</h4>
+
+  <!-- 2. 예시 이미지 -->
   <div class="text-center mb-3">
-    <img src="/static/base.png" alt="예시 이미지" class="img-fluid example-image rounded border" style="max-height: 500px;">
+    <img src="/static/bling.png" alt="예시 이미지" class="img-fluid example-image rounded border" style="max-height: 500px;">
   </div>
 
   <!-- 3~5. 폼 입력 및 버튼 -->
@@ -19,19 +19,20 @@
   
     <!-- 문구 입력 -->
     <div class="mb-4">
-      <label for="id_text" class="form-label">말풍선에 들어갈 글</label>
-      {{ form.text|add_class:"form-control" }}
+      <label for="id_text_1" class="form-label">위에 들어갈 글</label>
+      {{ form.text_1|add_class:"form-control" }}
+    </div>
+
+    <!-- 문구 입력 -->
+    <div class="mb-4">
+      <label for="id_text_2" class="form-label">아래에 들어갈 글</label>
+      {{ form.text_2|add_class:"form-control" }}
     </div>
   
     <!-- 이미지 업로드 -->
     <div class="mb-4">
-      <label for="id_overlay_image_1" class="form-label">당하는 편 이미지</label>
-      {{ form.overlay_image_1|add_class:"form-control" }}
-    </div>
-
-    <div class="mb-4">
-      <label for="id_overlay_image_2" class="form-label">공격하는 강아지 머리</label>
-      {{ form.overlay_image_2|add_class:"form-control" }}
+      <label for="id_overlay_image" class="form-label">드레이크 몸통 이미지</label>
+      {{ form.overlay_image|add_class:"form-control" }}
     </div>
   
     <!-- 생성 버튼 -->
