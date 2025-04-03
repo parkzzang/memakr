@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+<main class="container my-3">
+
+  <!-- 제목 -->
+  <h4 class="mb-2 text-center">{{ title }}</h4>
+
+  <!-- 템플릿 → 예시 이미지 (with Bootstrap 아이콘) -->
+  <div class="row justify-content-center align-items-center gx-2 gy-2 text-center mb-3">
+    <!-- 템플릿 이미지 -->
+    <div class="col-12 col-md-5">
+      <img src="/static/dragon.jpg" alt="템플릿 이미지"
+           class="img-fluid rounded border shadow-sm" style="max-height: 400px;">
+    </div>
+
+    <!-- 아이콘 화살표 -->
+    <div class="col-12 col-md-1 d-flex justify-content-center align-items-center">
+      <!-- 데스크탑: → -->
+      <i class="bi bi-arrow-right d-none d-md-inline" style="font-size: 4rem; opacity: 0.6;"></i>
+      <!-- 모바일: ↓ -->
+      <i class="bi bi-arrow-down d-inline d-md-none" style="font-size: 4rem; opacity: 0.6;"></i>
+    </div>
+
+    <!-- 예시 이미지 -->
+    <div class="col-12 col-md-5">
+      <img src="/static/dragon_example.png" alt="예시 이미지"
+           class="img-fluid rounded border shadow-sm" style="max-height: 400px;">
+    </div>
+  </div>
+  <!-- 3~5. 폼 입력 및 버튼 -->
+  <form method="post" enctype="multipart/form-data"
+  class="p-4 rounded shadow-sm"
+  style="background-color: #fdf6ff; border: 1px solid #e0d5f7;">
+    {% csrf_token %}
+  
+    <!-- 문구 입력 -->
+    <div class="mb-4">
+      <label for="id_text_1" class="form-label">1번 용 위에 적을 문구</label>
+      {{ form.text_1|add_class:"form-control" }}
+    </div>
+
+    <!-- 문구 입력 -->
+    <div class="mb-4">
+      <label for="id_text_2" class="form-label">2번 용 위에 적을 문구</label>
+      {{ form.text_2|add_class:"form-control" }}
+    </div>
+
+    <!-- 문구 입력 -->
+    <div class="mb-4">
+      <label for="id_text_3" class="form-label">3번 용 위에 적을 문구</label>
+      {{ form.text_3|add_class:"form-control" }}
+    </div>
+  
+    <!-- 이미지 업로드 토글 버튼 -->
+    <div class="d-flex text-center justify-content-center mb-3">
+      <button
+        class="btn btn-light border rounded-pill shadow-sm d-flex align-items-center justify-content-center"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#imageUploadCollapse"
+        aria-expanded="false"
+        aria-controls="imageUploadCollapse"
+        id="toggleUploadBtn"
+        style="width: 100px; height: 36px; font-size: 1.25rem;">
+        <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+  
+    <!-- 접히는 영역 -->
+    <div class="collapse" id="imageUploadCollapse">
+      <div class="mb-4">
+        <label class="form-label">1번 용 몸통 이미지</label>
+        {{ form.image_1|add_class:"form-control" }}
+      </div>
+      <div class="mb-4">
+        <label class="form-label">2번 용 몸통 이미지</label>
+        {{ form.image_2|add_class:"form-control" }}
+      </div>
+      <div class="mb-4">
+        <label class="form-label">3번 용 몸통 이미지</label>
+        {{ form.image_3|add_class:"form-control" }}
+      </div>
+    </div>
+  
+    <!-- 생성 버튼 -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-lg px-4"
+        style="background-color: #4B0082; color: white;">나만의 이미지 만들기</button>
+    </div>
+  </form>
+
+  <!-- 결과 이미지 표시 -->
+  {% if image_path %}
+    <div class="mt-5 text-center">
+      <h4 class="mb-3">생성된 이미지:</h4>
+      <img src="{{ image_path }}" alt="생성 이미지" class="img-fluid border rounded">
+    </div>
+  {% endif %}
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('toggleUploadBtn');
+    const icon = toggleBtn.querySelector('i');
+    const collapseEl = document.getElementById('imageUploadCollapse');
+
+    collapseEl.addEventListener('show.bs.collapse', () => {
+      icon.classList.remove('bi-chevron-down');
+      icon.classList.add('bi-chevron-up');
+    });
+
+    collapseEl.addEventListener('hide.bs.collapse', () => {
+      icon.classList.remove('bi-chevron-up');
+      icon.classList.add('bi-chevron-down');
+    });
+  });
+</script>  
+  
+{% endblock %}

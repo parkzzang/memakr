@@ -1,16 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import ImageForm
-from PIL import Image, ImageDraw, ImageFont, ImageOps
-import os, uuid
+from PIL import Image, ImageOps
+import os
 from django.conf import settings
-from datetime import datetime
+from config.meme_menu import get_meme_title
 
 from common.utils import (
     generate_unique_filename,
     skew_image,
     draw_justified_text_in_box,
-    get_line_height,
-    wrap_text
 )
 
 # index 뷰
@@ -85,7 +83,11 @@ def index(request):
     else:
         form = ImageForm()
 
-    return render(request, 'woof/landing.html', {'form': form})
+    title = get_meme_title('woof')  # 또는 request.path에서 앱 이름 자동 추출
+    return render(request, 'woof/landing.html', {
+        'form': form,
+        'title': title
+    })
 
 # result 뷰
 def result(request):

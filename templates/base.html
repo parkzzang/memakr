@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- Custom Font -->
     <style>
         @font-face {
@@ -30,13 +31,38 @@
         }
 
         .glow-text {
-          text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 12px rgba(255, 100, 0, 0.4);
-          font-size: 1.8rem;
-          letter-spacing: 1px;
+          position: relative;
+          color: #fff8dc; /* 크림빛 흰색 */
+          font-size: 2rem;
+          text-shadow:
+            0 0 3px #fff8dc,
+            0 0 6px #ffe066,
+            0 0 10px #ffcc00;
+          animation: yellowGlow 3s ease-in-out infinite;
         }
 
+        @keyframes yellowGlow {
+          0%, 100% {
+            text-shadow:
+              0 0 3px #fff8dc,
+              0 0 6px #ffe066,
+              0 0 10px #ffcc00;
+          }
+          50% {
+            text-shadow:
+              0 0 2px #fff3b0,
+              0 0 4px #ffd700,
+              0 0 6px #ffb700;
+          }
+        }
+
+        button[type="submit"]:hover {
+          background-color: #5936a2 !important;
+        }
+</style>
+
     </style>
-    <title>밈 메이커</title>
+    <title>나만의 밈 창작소</title>
 </head>
 <body>
 <!-- ✅ 반응형 헤더 with 햄버거 메뉴 -->
@@ -55,14 +81,14 @@
 
     <!-- 제목 (모바일 중앙, 데스크탑 왼쪽) -->
     <a class="navbar-brand fw-bold d-none d-lg-block text-white glow-text" href="/">
-      밈 메이커
+      나만의 밈 창작소
     </a>
     
   
     <!-- 모바일 전용 중앙 제목 -->
     <div class="mobile-title position-absolute top-50 start-50 translate-middle d-block d-lg-none">
-        <a class="navbar-brand fw-bold text-light" href="/" style="font-size: 1.25rem;">
-          밈 메이커
+        <a class="navbar-brand fw-bold text-white glow-text" href="/" style="font-size: 1.2rem;">
+          나만의 밈 창작소
         </a>
       </div>
   
@@ -85,7 +111,7 @@
 
       <!-- 언어 선택 -->
       <form id="langSelect" class="mobile-title">
-        <select class="form-select w-auto rounded-pill shadow-sm" style="min-width: 100px;">
+        <select class="form-select-sm w-auto rounded-pill shadow-sm">
           <option value="ko">한국어</option>
           <option value="en">English</option>
           <option value="jp">日本語</option>
@@ -138,6 +164,5 @@
         });
       });
     </script>
-    
 </body>
 </html>

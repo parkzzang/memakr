@@ -1,15 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import ImageForm
-from PIL import Image, ImageDraw, ImageFont, ImageOps
-import os, uuid
+from PIL import Image, ImageOps
+import os
 from django.conf import settings
-from datetime import datetime
+from config.meme_menu import get_meme_title
 
 from common.utils import (
     generate_unique_filename,
     draw_justified_text_in_box,
-    get_line_height,
-    wrap_text
 )
 
 # index 뷰
@@ -32,7 +30,7 @@ def index(request):
                 overlay = ImageOps.exif_transpose(overlay)
 
                 # 비율 유지하며 축소
-                overlay.thumbnail((220, 220), Image.LANCZOS)
+                overlay.thumbnail((200, 200), Image.LANCZOS)
 
                 # ✅ 첫 번째 삽입용: 회전 처리 (예: 10도 회전)
                 rotated_overlay = overlay.rotate(10, expand=True)
@@ -62,7 +60,11 @@ def index(request):
     else:
         form = ImageForm()
 
-    return render(request, 'bling/landing.html', {'form': form})
+    title = get_meme_title('bling')
+    return render(request, 'bling/landing.html', {
+        'form': form,
+        'title': title
+    })
 
 # result 뷰
 def result(request):
