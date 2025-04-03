@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    {% for category in meme_menu %}
+      <div class="col-md-4 mb-4 text-center">
+        <a href="/{{ category.slug }}/">
+          <img src="{% static category.image %}" class="img-fluid rounded shadow-sm" style="max-height: 150px;">
+          <h5 class="mt-2">{{ category.emoji }} {{ category.name }}</h5>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

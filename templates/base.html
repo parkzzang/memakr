@@ -72,9 +72,15 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">🌐메인</a></li>
           <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/community/">👥커뮤니티</a></li>
-          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/woof/">🐶나쁜 답변 좋은 답변</a></li>
-          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/bling/">🤘드레이크 Hotline Bling</a></li>
+          {% for item in meme_menu %}
+            <li class="nav-item">
+              <a class="nav-link text-white fw-semibold" href="/{{ item.slug }}/">
+                {{ item.emoji }}{{ item.name }}
+              </a>
+            </li>
+          {% endfor %}
         </ul>
+        
       </div>
 
       <!-- 언어 선택 -->

@@ -32,7 +32,7 @@ def index(request):
                 overlay = ImageOps.exif_transpose(overlay)
 
                 # 비율 유지하며 축소
-                overlay.thumbnail((230, 230), Image.LANCZOS)
+                overlay.thumbnail((220, 220), Image.LANCZOS)
 
                 # ✅ 첫 번째 삽입용: 회전 처리 (예: 10도 회전)
                 rotated_overlay = overlay.rotate(10, expand=True)

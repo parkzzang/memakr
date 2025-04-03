@@ -23,8 +23,10 @@ from woof import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('main.urls')),
     path('woof/', include('woof.urls')),
-    path('bling/', include('bling.urls'))
+    path('bling/', include('bling.urls')),
+    path('community/', include('community.urls'))
 ]
 
 if settings.DEBUG:

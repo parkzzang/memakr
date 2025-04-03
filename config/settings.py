@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'woof',
     'bling',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'main.context_processors.meme_menu',
             ],
         },
     },
@@ -131,3 +133,23 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEME_MENU = [
+    {
+        'name': '나쁜답변 좋은답변 밈',
+        'emoji': '🐶',
+        'slug': 'woof',   # URL 경로: /woof/
+        "image": "base.png"
+    },
+    {
+        'name': '드레이크 거부/수용 밈',
+        'emoji': '🤘',
+        'slug': 'bling',  # URL 경로: /bling/
+        "image": "bling.png"
+    },
+    {
+        'name': '꽁꽁 얼어붙은 한강 밈',
+        'emoji': '😺',
+        'slug': 'cat',  # URL 경로: /bling/
+    },
+]
