@@ -55,7 +55,7 @@ def index(request):
                 overlay = ImageOps.exif_transpose(overlay)
 
                 # 비율 유지하며 축소
-                overlay.thumbnail((150, 80), Image.LANCZOS)
+                overlay.thumbnail((160, 105), Image.LANCZOS)
 
                 # 첫 번째 삽입 (중앙)
                 overlay = overlay.rotate(-10, expand=True)

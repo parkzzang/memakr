@@ -1,33 +1,7 @@
 {% extends 'base.html' %}
 {% load custom_filters %}
 {% block content %}
-<main class="container my-3">
-  
-  <!-- 제목 -->
-  <h4 class="mb-2 text-center">{{ title }}</h4>
-
-  <!-- 템플릿 → 예시 이미지 (with Bootstrap 아이콘) -->
-  <div class="row justify-content-center align-items-center gx-2 gy-2 text-center mb-3">
-    <!-- 템플릿 이미지 -->
-    <div class="col-12 col-md-5">
-      <img src="/static/base.png" alt="템플릿 이미지"
-           class="img-fluid rounded border shadow-sm" style="max-height: 400px;">
-    </div>
-
-    <!-- 아이콘 화살표 -->
-    <div class="col-12 col-md-1 d-flex justify-content-center align-items-center">
-      <!-- 데스크탑: → -->
-      <i class="bi bi-arrow-right d-none d-md-inline" style="font-size: 4rem; opacity: 0.6;"></i>
-      <!-- 모바일: ↓ -->
-      <i class="bi bi-arrow-down d-inline d-md-none" style="font-size: 4rem; opacity: 0.6;"></i>
-    </div>
-
-    <!-- 예시 이미지 -->
-    <div class="col-12 col-md-5">
-      <img src="/static/woof_example.png" alt="예시 이미지"
-           class="img-fluid rounded border shadow-sm" style="max-height: 400px;">
-    </div>
-  </div>
+{% include 'preview.html' with template_image='base.png' example_image='woof_example.png' %}
 
   <!-- 3~5. 폼 입력 및 버튼 -->
   <form method="post" enctype="multipart/form-data"

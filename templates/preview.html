@@ -1,0 +1,31 @@
+{% load static %}
+
+<main class="container my-3">
+
+  <!-- 제목 -->
+  <h4 class="mb-2 text-center">{{ title }}</h4>
+
+  <!-- 템플릿 → 예시 이미지 (with Bootstrap 아이콘) -->
+  <div class="row justify-content-center align-items-center gx-2 gy-2 text-center mb-3">
+    <!-- 템플릿 이미지 -->
+    <div class="col-12 col-md-5">
+      <img src="{% static template_image %}" alt="템플릿 이미지"
+           class="img-fluid rounded border shadow" style="max-height: 400px;">
+    </div>
+
+    <!-- 아이콘 화살표 -->
+    <div class="col-12 col-md-1 d-flex justify-content-center align-items-center">
+      <!-- 데스크탑: → -->
+      <i class="bi bi-arrow-right d-none d-md-inline" style="font-size: 4rem; opacity: 0.6;"></i>
+      <!-- 모바일: ↓ -->
+      <i class="bi bi-arrow-down d-inline d-md-none" style="font-size: 4rem; opacity: 0.6;"></i>
+    </div>
+
+    <!-- 예시 이미지 -->
+    <div class="col-12 col-md-5">
+      <img src="{% static example_image %}" alt="예시 이미지"
+           class="img-fluid rounded border shadow" style="max-height: 400px;">
+    </div>
+  </div>
+
+</main>

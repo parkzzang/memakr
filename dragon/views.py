@@ -33,7 +33,7 @@ def index(request):
                 try:
                     overlay = Image.open(image_1).convert("RGBA")
                     overlay = ImageOps.exif_transpose(overlay)
-                    overlay.thumbnail((160, 160), Image.LANCZOS)
+                    overlay.thumbnail((200, 200), Image.LANCZOS)
                     94,417,65
                     base.paste(overlay, (105 - overlay.width // 2, 440 - overlay.height // 2), overlay)
                 except Exception as e:
@@ -44,7 +44,7 @@ def index(request):
                 try:
                     overlay = Image.open(image_2).convert("RGBA")
                     overlay = ImageOps.exif_transpose(overlay)
-                    overlay.thumbnail((160, 160), Image.LANCZOS)
+                    overlay.thumbnail((200, 200), Image.LANCZOS)
                     base.paste(overlay, (330 - overlay.width // 2, 390 - overlay.height // 2), overlay)
                 except Exception as e:
                     print(f"image_2 처리 오류: {e}")
@@ -54,7 +54,7 @@ def index(request):
                 try:
                     overlay = Image.open(image_3).convert("RGBA")
                     overlay = ImageOps.exif_transpose(overlay)
-                    overlay.thumbnail((160, 160), Image.LANCZOS)
+                    overlay.thumbnail((200, 200), Image.LANCZOS)
                     base.paste(overlay, (570 - overlay.width // 2, 430 - overlay.height // 2), overlay)
                 except Exception as e:
                     print(f"image_3 처리 오류: {e}")
@@ -62,11 +62,11 @@ def index(request):
             # ✅ 텍스트들
             try:
                 if text_1:
-                    draw_justified_text_in_box(base, text_1, (83,28,175,90), font_path, max_font_size=30, fill='white')
+                    draw_justified_text_in_box(base, text_1, (83,28,175,90), font_path, max_font_size=60, fill='white')
                 if text_2:
-                    draw_justified_text_in_box(base, text_2, (297,10,389,72), font_path, max_font_size=30, fill='white')
+                    draw_justified_text_in_box(base, text_2, (297,10,389,72), font_path, max_font_size=60, fill='white')
                 if text_3:
-                    draw_justified_text_in_box(base, text_3, (506,27,598,89), font_path, max_font_size=30, fill='white')
+                    draw_justified_text_in_box(base, text_3, (506,27,598,89), font_path, max_font_size=60, fill='white')
             except Exception as e:
                 print(f"텍스트 처리 오류: {e}")
 

@@ -45,11 +45,11 @@ def index(request):
             font_path = os.path.join(settings.BASE_DIR, 'static/fonts/NotoSansKR-ExtraBold.ttf')
             if text_1:
                 text_box_1 = (540, 0, 1080, 540)  # (x1, y1, x2, y2)
-                draw_justified_text_in_box(base, text_1, text_box_1, font_path, max_font_size=50, fill='black')
+                draw_justified_text_in_box(base, text_1, text_box_1, font_path, max_font_size=70, fill='black')
                 
             if text_2:
                 text_box_2 = (540, 540, 1080, 1080)  # (x1, y1, x2, y2)
-                draw_justified_text_in_box(base, text_2, text_box_2, font_path, max_font_size=50, fill='black')
+                draw_justified_text_in_box(base, text_2, text_box_2, font_path, max_font_size=70, fill='black')
 
             # 저장
             filename = generate_unique_filename()
