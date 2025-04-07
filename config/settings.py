@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-#4i_8ttmedf713!c-5f^0uzup3$2b%n13acch75wyqxpsd4!z_
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.0.44',
-                 '127.0.0.1',]
+                 '127.0.0.1',
+                 '3.39.69.171',]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
