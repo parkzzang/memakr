@@ -20,7 +20,7 @@ MEME_MENU = [
         'example': 'dragon_example.png',
     },
     {
-        'name': '이겨야 한다-딸깍 밈',
+        'name': '이겨야 한다/딸깍 밈',
         'slug': 'ddal',
         'image': 'ddal.png',
         'example': 'ddal_example.png',

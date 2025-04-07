@@ -1,44 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container my-3" style="max-width: 500px;">
+<div class="container my-5" style="max-width: 480px;">
 
-  <!-- ✅ 제목 -->
-  <h3 class="text-center mb-4">회원가입</h3>
+  <!-- 제목 -->
+  <h3 class="text-center mb-4 fw-bold text-dark">회원가입</h3>
 
-  <!-- ✅ 네이버 소셜 로그인 (임시 버튼) -->
-  <div class="text-center mb-4">
-    <a class="btn btn-success w-100" style="background-color: #03C75A; border: none;">
-      <i class="bi bi-person-circle me-1"></i> 네이버 아이디로 가입하기
-    </a>
-  </div>
-
-  <!-- ✅ 일반 회원가입 폼 -->
-  <form method="post" action="{% url 'main:signup' %}">
+  <!-- 일반 회원가입 폼 -->
+  <form method="post" action="{% url 'main:signup' %}" class="needs-validation" novalidate>
     {% csrf_token %}
     {% include "form_errors.html" %}
-    <div class="mb-3">
-      <label for="username">사용자 이름</label>
+
+    <div class="form-floating mb-3">
       <input type="text" class="form-control" name="username" id="username"
-             value="{{ form.username.value|default_if_none:'' }}">
+             value="{{ form.username.value|default_if_none:'' }}" placeholder="ID" required>
+      <label for="username">아이디</label>
     </div>
-    <div class="mb-3">
-      <label for="password1">비밀번호</label>
+
+    <div class="form-floating mb-3 position-relative">
       <input type="password" class="form-control" name="password1" id="password1"
-             value="{{ form.password1.value|default_if_none:'' }}">
+             value="{{ form.password1.value|default_if_none:'' }}" placeholder="비밀번호" required>
+      <label for="password1">비밀번호</label>
+      <i class="bi bi-eye-slash toggle-password" data-target="password1"
+         style="position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); cursor: pointer;"></i>
     </div>
-    <div class="mb-3">
-      <label for="password2">비밀번호 확인</label>
+    
+    <div class="form-floating mb-3 position-relative">
       <input type="password" class="form-control" name="password2" id="password2"
-             value="{{ form.password2.value|default_if_none:'' }}">
+             value="{{ form.password2.value|default_if_none:'' }}" placeholder="비밀번호 확인" required>
+      <label for="password2">비밀번호 확인</label>
+      <i class="bi bi-eye-slash toggle-password" data-target="password2"
+         style="position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); cursor: pointer;"></i>
     </div>
-    <div class="mb-3">
+    
+
+    <div class="form-floating mb-4">
+      <input type="email" class="form-control" name="email" id="email"
+             value="{{ form.email.value|default_if_none:'' }}" placeholder="이메일" required>
       <label for="email">이메일</label>
-      <input type="text" class="form-control" name="email" id="email"
-             value="{{ form.email.value|default_if_none:'' }}">
     </div>
-    <button type="submit" class="btn btn-primary w-100">회원가입 완료</button>
+
+    <button type="submit" class="btn btn-primary w-100 py-2" style="background-color: #4B0082; color: white;">회원가입 완료</button>
   </form>
 
 </div>
+{% endblock %}
+{% block script %}
+<script>
+document.querySelectorAll(".toggle-password").forEach(icon => {
+  icon.addEventListener("click", function () {
+    const input = document.getElementById(this.dataset.target);
+    const type = input.getAttribute("type") === "password" ? "text" : "password";
+    input.setAttribute("type", type);
+    this.classList.toggle("bi-eye");
+    this.classList.toggle("bi-eye-slash");
+  });
+});
+</script>
 {% endblock %}

@@ -107,7 +107,7 @@
 <body>
 <!-- ✅ 반응형 헤더 with 햄버거 메뉴 -->
 <nav class="navbar navbar-expand-lg" style="
-  background: linear-gradient(90deg, #7A5DC7, #A084CA);
+  background: linear-gradient(80deg, #5A3FA0, #A084CA);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 ">
 
@@ -212,12 +212,16 @@
     <!-- 6. 푸터 -->
     <footer class="container text-center py-4 mt-5 border-top">
        <div class="dev-info text-muted">
-         &copy; 2025 | sechan
+         &copy; 2025 | 나만의 밈 창작소 (Meme Maker)
        </div>
      </footer>
 
      <!-- ✅ Bootstrap JS (선택사항) -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <!-- 자바스크립트 Start -->
+     {% block script %}
+     {% endblock %}
+     <!-- 자바스크립트 End -->
      <script>
       document.addEventListener('DOMContentLoaded', function () {
         const navCollapse = document.getElementById('mainNav');

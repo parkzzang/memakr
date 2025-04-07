@@ -2,53 +2,84 @@
 {% load static %}
 {% block content %}
 <div class="container my-3">
-
-  <!-- 💻 데스크탑: 상단 우측 버튼 -->
-  <div class="d-none d-md-flex justify-content-end mb-3">
-    <a href="{% url 'community:question_create' %}" class="btn btn-outline-primary rounded-pill shadow-sm">
-      <i class="bi bi-pencil-square me-1"></i> 글쓰기
-    </a>
+  <div class="row my-3">
+    <div class="col-12 col-md-6 mb-2 mb-md-0">
+      <form method="get">
+        <div class="input-group">
+          <input type="text" name="kw" class="form-control" placeholder="검색어 입력" value="{{ kw }}">
+          <button class="btn btn-outline-secondary" type="submit">찾기</button>
+        </div>
+      </form>
+    </div>
+  
+    <!-- 데스크탑에만 보이는 글쓰기 버튼 -->
+    <div class="col-md-6 text-end d-none d-md-block">
+      <a href="{% url 'community:question_create' %}" class="btn btn-outline-primary rounded-pill shadow-sm">
+        <i class="bi bi-pencil-square me-1"></i> 글쓰기
+      </a>
+    </div>
   </div>
+  
 
 <!-- 질문 카드 목록 -->
 <div class="row row-cols-1 g-3">
     {% for question in question_list %}
-      <div class="col">
-        <div class="card shadow-sm h-100 position-relative">
-          <div class="card-body">
+    <div class="col">
+      <div class="card shadow-sm h-100 position-relative">
+        <div class="card-body d-flex justify-content-between align-items-start">
+    
+          <!-- 왼쪽: 텍스트 정보 -->
+          <div class="flex-grow-1 pe-3">
             <!-- 제목 -->
             <h5 class="card-title mb-2">{{ question.subject }}</h5>
-  
+    
             <!-- 내용 요약 -->
             <p class="card-text text-muted small mb-2">
               {{ question.content|truncatewords:20 }}
             </p>
-  
+    
             <!-- 카드 하단 메타 정보 -->
             <div class="d-flex justify-content-between align-items-center mt-3">
               <small class="text-muted">
+                {% if question.modify_date %}
+                  <span>(수정됨)</span>
+                {% endif %}
                 {{ question.create_date|date:"m-d H:i" }}
               </small>
               <div class="d-flex align-items-center gap-2">
-                <!-- 댓글 수 -->
                 {% if question.answer_set.count > 0 %}
                   <span class="text-danger small">
-                    <i class="bi bi-chat-dots me-1"></i> {{ question.answer_set.count }}
+                    <i class="bi bi-chat-dots me-1"></i>{{ question.answer_set.count }}
                   </span>
                 {% endif %}
-  
-                <!-- 향후 추천 수 -->
-                <span class="text-primary small">
-                  <i class="bi bi-hand-thumbs-up me-1"></i> 0
-                </span>
+    
+                {% with question.voter.count as vote_count %}
+                  {% if vote_count > 0 %}
+                    <span class="text-primary small">
+                      <i class="bi bi-hand-thumbs-up me-1"></i>{{ vote_count }}
+                    </span>
+                  {% endif %}
+                {% endwith %}
               </div>
             </div>
-  
+    
             <!-- 전체 링크 -->
             <a href="{% url 'community:detail' question.id %}" class="stretched-link"></a>
           </div>
+    
+          <!-- 오른쪽: 썸네일 이미지 -->
+          {% if question.image %}
+          <div style="flex-shrink: 0; width: 75px; height: 75px;">
+            <img src="{{ question.image.url }}" alt="썸네일"
+                 class="img-fluid rounded shadow-sm"
+                 style="max-width: 100%; max-height: 100%; object-fit: contain;">
+          </div>
+        {% endif %}
+        
         </div>
       </div>
+    </div>
+    
     {% empty %}
       <p class="text-muted">질문이 없습니다.</p>
     {% endfor %}
@@ -60,4 +91,23 @@
    style="position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; z-index: 1030;">
   <i class="bi bi-pencil" style="font-size: 1.25rem;"></i>
 </a>
+
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+    document.getElementById('kw').value = document.getElementById('search_kw').value;
+    document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
+</script>
 {% endblock %}

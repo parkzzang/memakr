@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container my-3">
     <h5 class="my-3 border-bottom pb-2">글 쓰기</h5>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- 오류표시 Start -->
         {% if form.errors %}
@@ -29,7 +29,13 @@
             <textarea class="form-control" name="content"
                       id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">등록</button>
+        <div class="mb-3">
+          {{ form.image.label_tag }}
+          {{ form.image }}
+        </div>
+        <div class="text-end">   
+            <button type="submit" class="btn btn-primary text-end" style="background-color: #6f42c1; color: white;">등록</button>
+        </div>
     </form>
 </div>
 {% endblock %}
