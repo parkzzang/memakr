@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+{% include 'preview.html' with template_image='ddal.png' example_image='ddal_example.png' %}
+
+  <!-- 3~5. 폼 입력 및 버튼 -->
+  <form method="post" enctype="multipart/form-data"
+  class="p-4 rounded shadow-sm"
+  style="background-color: #fdf6ff; border: 1px solid #e0d5f7;">
+    {% csrf_token %}
+
+    <!-- 문구 입력 -->
+    <div class="mb-4">
+      <label for="id_text_1" class="form-label">왼쪽 문구</label>
+      {{ form.text_1|add_class:"form-control" }}
+    </div>
+
+    <!-- 문구 입력 -->
+    <div class="mb-4">
+      <label for="id_text_2" class="form-label">오른쪽 문구</label>
+      {{ form.text_2|add_class:"form-control" }}
+    </div>
+
+    <!-- 이미지 업로드 -->
+    <div class="mb-4">
+      <label class="form-label">왼쪽 사람 이미지</label>
+      {{ form.image_1|add_class:"form-control" }}
+    </div>
+
+    <!-- 이미지 업로드 -->
+    <div class="mb-4">
+      <label class="form-label">오른쪽 사탄 이미지</label>
+      {{ form.image_2|add_class:"form-control" }}
+    </div>
+  
+    <!-- 생성 버튼 -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-lg px-4"
+        style="background-color: #4B0082; color: white;">나만의 이미지 만들기</button>
+    </div>
+  </form>
+
+  <!-- 결과 이미지 표시 -->
+  {% if image_path %}
+    <div class="mt-5 text-center">
+      <h4 class="mb-3">생성된 이미지:</h4>
+      <img src="{{ image_path }}" alt="생성 이미지" class="img-fluid border rounded">
+    </div>
+  {% endif %}
+</main>
+
+{% endblock %}

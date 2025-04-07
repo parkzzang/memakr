@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'woof',
     'bling',
     'main',
+    'dragon',
+    'community',
+    'ddal',
 ]
 
 MIDDLEWARE = [
@@ -134,22 +137,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEME_MENU = [
-    {
-        'name': '나쁜답변 좋은답변 밈',
-        'emoji': '🐶',
-        'slug': 'woof',   # URL 경로: /woof/
-        "image": "base.png"
-    },
-    {
-        'name': '드레이크 거부/수용 밈',
-        'emoji': '🤘',
-        'slug': 'bling',  # URL 경로: /bling/
-        "image": "bling.png"
-    },
-    {
-        'name': '꽁꽁 얼어붙은 한강 밈',
-        'emoji': '😺',
-        'slug': 'cat',  # URL 경로: /bling/
-    },
-]
+LOGIN_REDIRECT_URL = '/'

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container my-3">
+
+  <!-- 질문 카드 -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h4 class="card-title">{{ question.subject }}</h4>
+      <p class="card-text">{{ question.content }}</p>
+      <p class="card-text text-end text-muted" style="font-size: 0.875rem;">
+        작성일: {{ question.create_date|date:"Y-m-d H:i" }}
+      </p>
+    </div>
+  </div>
+
+  <!-- 댓글 작성 폼 -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <form action="{% url 'community:answer_create' question.id %}" method="post">
+        {% csrf_token %}
+        <!-- 오류표시 Start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+        <div class="mb-3">
+          <textarea name="content" id="content" class="form-control" rows="4" placeholder="내용을 입력하세요"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">댓글 등록</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 답변 목록 -->
+  <div class="mb-4">
+    <h5 class="mb-3">💬 댓글</h5>
+    {% if question.answer_set.all %}
+      <div class="list-group">
+        {% for answer in question.answer_set.all %}
+          <div class="list-group-item">
+            {{ answer.content }}
+            <div class="text-end text-muted small">
+              {{ answer.create_date|date:"Y-m-d H:i" }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-muted">아직 댓글이 없습니다.</p>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

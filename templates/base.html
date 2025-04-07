@@ -6,8 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- ✅ Bootstrap CSS (필수) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <!-- Custom Font -->
     <style>
         @font-face {
@@ -56,9 +59,46 @@
           }
         }
 
+        body {
+          overflow-y: scroll; /* 항상 세로 스크롤 공간 확보 */
+        }
+
         button[type="submit"]:hover {
           background-color: #5936a2 !important;
         }
+
+        /* 호버 시 드롭다운 메뉴 표시 */
+        .hover-dropdown:hover > .dropdown-menu {
+          display: block;
+          margin-top: 0.5rem;
+          animation: fadeIn 0.2s ease-in-out;
+        }
+
+        /* 부드러운 애니메이션 효과 */
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 초기 상태 숨김 */
+        .dropdown-menu.custom-fade {
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(5px);
+          transition: all 0.2s ease-in-out;
+          display: block !important; /* Bootstrap이 display:none 처리하는 것 무력화 */
+        }
+
+        /* 보이게 할 때 */
+        .dropdown-menu.custom-fade.showing {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        
+</style>
+
 </style>
 
     </style>
@@ -94,19 +134,62 @@
   
   
       <!-- 네비게이션 링크 -->
-      <div class="collapse navbar-collapse justify-content-between" id="mainNav">
+      <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/">🌐메인</a></li>
-          <li class="nav-item"><a class="nav-link text-white fw-semibold" href="/community/">👥커뮤니티</a></li>
+          <!-- 밈 템플릿 -->
+          <!-- 💻 데스크탑: 드롭다운 -->
+          <li class="nav-item dropdown d-none d-lg-block position-relative" id="hoverDropdown">
+            <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" role="button" id="memeDropdown">
+              🎨 밈 템플릿
+            </a>
+            <ul class="dropdown-menu mt-1 shadow" style="top: 100%; left: 0;">
+              {% for item in meme_menu %}
+                <li><a class="dropdown-item" href="/{{ item.slug }}/">{{ item.emoji }} {{ item.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          
+
+        
+          <!-- 📱 모바일: 펼쳐진 링크 -->
+          <li class="nav-item d-block d-lg-none text-white fw-semibold">
+            <span class="nav-link text-white fw-bold">🎨 밈 템플릿</span>
+          </li>
           {% for item in meme_menu %}
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link text-white ps-4" href="/{{ item.slug }}/">
+              {{ item.emoji }} {{ item.name }}
+            </a>
+          </li>
+          {% endfor %}
+
+          <!-- 일반 메뉴 -->
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold" href="/">🌐 메인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold" href="/community/">👥 커뮤니티</a>
+          </li>
+                  
+        </ul>
+      
+        <!-- 🔐 인증 메뉴 (오른쪽) -->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link text-white fw-semibold" href="/{{ item.slug }}/">
-                {{ item.emoji }}{{ item.name }}
+              <a class="nav-link text-white fw-semibold" href="{% url 'main:logout' %}">
+                {{ user.username }} (로그아웃)
               </a>
             </li>
-          {% endfor %}
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link text-white fw-semibold" href="{% url 'main:login' %}">로그인</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white fw-semibold" href="{% url 'main:signup' %}">회원가입</a>
+            </li>
+          {% endif %}
         </ul>
-        
       </div>
 
       <!-- 언어 선택 -->
@@ -163,6 +246,28 @@
           mobileTitle.classList.remove('hide');
         });
       });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const hoverItem = document.getElementById('hoverDropdown');
+        const dropdownMenu = hoverItem.querySelector('.dropdown-menu');
+            
+        // 커스텀 드롭다운 스타일 적용
+        dropdownMenu.classList.add('custom-fade');
+            
+        let timer;
+            
+        hoverItem.addEventListener('mouseenter', () => {
+          clearTimeout(timer);
+          dropdownMenu.classList.add('showing');
+        });
+      
+        hoverItem.addEventListener('mouseleave', () => {
+          timer = setTimeout(() => {
+            dropdownMenu.classList.remove('showing');
+          }, 100);
+        });
+      });
+
     </script>
 </body>
 </html>

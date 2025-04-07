@@ -28,6 +28,7 @@ urlpatterns = [
     path('woof/', include('woof.urls')),
     path('bling/', include('bling.urls')),
     path('dragon/', include('dragon.urls')),
+    path('ddal/', include('ddal.urls')),
 ]
 
 if settings.DEBUG:
