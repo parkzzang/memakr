@@ -72,24 +72,27 @@
       <img src="{{ image_path }}" alt="생성 이미지" class="img-fluid border rounded">
     </div>
   {% endif %}
-</main>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const toggleBtn = document.getElementById('toggleUploadBtn');
-    const icon = toggleBtn.querySelector('i');
-    const collapseEl = document.getElementById('imageUploadCollapse');
+</main> 
+{% endblock %}
+{% block script %}
+  <script>
+    // 토글 버튼 아이콘 전환만 남겨두기
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleBtn = document.getElementById('toggleUploadBtn');
+      const icon = toggleBtn.querySelector('i');
+      const collapseEl = document.getElementById('imageUploadCollapse');
 
-    collapseEl.addEventListener('show.bs.collapse', () => {
-      icon.classList.remove('bi-chevron-down');
-      icon.classList.add('bi-chevron-up');
+      collapseEl.addEventListener('show.bs.collapse', () => {
+        icon.classList.remove('bi-chevron-down');
+        icon.classList.add('bi-chevron-up');
+      });
+
+      collapseEl.addEventListener('hide.bs.collapse', () => {
+        icon.classList.remove('bi-chevron-up');
+        icon.classList.add('bi-chevron-down');
+      });
     });
+  </script>
 
-    collapseEl.addEventListener('hide.bs.collapse', () => {
-      icon.classList.remove('bi-chevron-up');
-      icon.classList.add('bi-chevron-down');
-    });
-  });
-</script>  
-
-  
+  {% include "svg_to_png_script.html" %}
 {% endblock %}

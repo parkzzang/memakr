@@ -40,6 +40,21 @@
       <label for="email">이메일</label>
     </div>
 
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="checkbox" id="agreeTerms" name="agree_terms" required>
+      <label class="form-check-label" for="agreeTerms">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">이용약관</a>에 동의합니다. (필수)
+      </label>
+    </div>
+    
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="checkbox" id="agreePrivacy" name="agree_privacy" required>
+      <label class="form-check-label" for="agreePrivacy">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보처리방침</a>에 동의합니다. (필수)
+      </label>
+    </div>
+    
+
     <button type="submit" class="btn btn-primary w-100 py-2" style="background-color: #4B0082; color: white;">회원가입 완료</button>
   </form>
 

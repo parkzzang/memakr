@@ -1,0 +1,81 @@
+<script>
+  console.log('✅ SVG to PNG 스크립트 실행됨');
+  
+  function convertSVGToPNG(file, callback) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const svgText = e.target.result;
+      const img = new Image();
+      const svgBlob = new Blob([svgText], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(svgBlob);
+  
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width || 512;
+        canvas.height = img.height || 512;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob(function (blob) {
+          callback(blob);
+          URL.revokeObjectURL(url);
+        }, 'image/png');
+      };
+  
+      img.onerror = function () {
+        alert('SVG → PNG 변환 실패');
+      };
+  
+      img.src = url;
+    };
+    reader.readAsText(file);
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('form');
+  
+    if (forms.length === 0) {
+      console.warn('⚠ form 하나도 안 찾음');
+      return;
+    }
+  
+    forms.forEach(form => {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const fileInputs = form.querySelectorAll('input[type="file"]');
+        const promises = [];
+  
+        fileInputs.forEach(input => {
+          const file = input.files[0];
+          if (!input.name) {
+            console.warn(`⚠ input[name] 없음 (id: ${input.id})`);
+            return;
+          }
+  
+          if (file && file.name.toLowerCase().endsWith('.svg')) {
+            console.log(`🖼️ ${file.name} → PNG 변환 중... (${input.name})`);
+            const promise = new Promise(resolve => {
+              convertSVGToPNG(file, (pngBlob) => {
+                formData.set(input.name, pngBlob, file.name.replace(/\.svg$/i, '.png'));
+                resolve();
+              });
+            });
+            promises.push(promise);
+          }
+        });
+  
+        Promise.all(promises).then(() => {
+          console.log('📤 서버로 폼 전송...');
+          fetch(form.action, {
+            method: 'POST',
+            body: formData
+          }).then(res => res.text())
+            .then(html => {
+              document.body.innerHTML = html;
+            });
+        });
+      });
+    });
+  });
+  </script>
+  

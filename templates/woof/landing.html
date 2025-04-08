@@ -42,3 +42,59 @@
   {% endif %}
 </main>
 {% endblock %}
+{% block script %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const imageInputs = [
+      document.getElementById('id_overlay_image_1'),
+      document.getElementById('id_overlay_image_2')
+    ];
+  
+    imageInputs.forEach(input => {
+      input.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+  
+        if (file && file.name.toLowerCase().endsWith('.svg')) {
+          const reader = new FileReader();
+  
+          reader.onload = function (e) {
+            const svgText = e.target.result;
+  
+            // SVG를 이미지로 변환
+            const img = new Image();
+            const svgBlob = new Blob([svgText], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(svgBlob);
+  
+            img.onload = function () {
+              const canvas = document.createElement('canvas');
+              canvas.width = img.width || 512;
+              canvas.height = img.height || 512;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0);
+  
+              canvas.toBlob(function (blob) {
+                const newFile = new File([blob], file.name.replace(/\.svg$/i, '.png'), { type: 'image/png' });
+  
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(newFile);
+                input.files = dataTransfer.files;
+  
+                URL.revokeObjectURL(url); // 메모리 정리
+              }, 'image/png');
+            };
+  
+            img.onerror = function () {
+              alert('SVG 파일을 이미지로 변환하는 데 실패했습니다.');
+            };
+  
+            img.src = url;
+          };
+  
+          reader.readAsText(file);
+        }
+      });
+    });
+  });
+  </script>
+  {% include "svg_to_png_script.html" %}
+{% endblock %}
