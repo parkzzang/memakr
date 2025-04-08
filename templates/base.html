@@ -10,6 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6643579565513484"
+     crossorigin="anonymous"></script>
 
     <!-- Custom Font -->
     <style>
@@ -169,7 +171,7 @@
 
     <!-- 일반 메뉴들 -->
     <li class="nav-item">
-      <a class="nav-link fw-semibold {% if request.path == '/' %}text-secondary{% else %}text-white{% endif %}"
+      <a class="nav-link fw-semibold text-white"
          href="/">🌐 메인</a>
     </li>
     <li class="nav-item">
@@ -231,10 +233,95 @@
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
     <!-- 6. 푸터 -->
     <footer class="container text-center py-4 mt-5 border-top">
-       <div class="dev-info text-muted">
-         &copy; 2025 | 나만의 밈 창작소 (Meme Maker)
-       </div>
-     </footer>
+      <div class="policy-links mb-2" style="font-size: 0.5rem;">
+        <a href="#" class="text-muted me-2" data-bs-toggle="modal" data-bs-target="#termsModal">이용약관</a> |
+        <a href="#" class="text-muted mx-2" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보처리방침</a>
+      </div>
+      <div class="dev-info text-muted" style="font-size: 0.5rem;">
+        &copy; 2025 나만의 밈 창작소. All rights reserved.
+      </div>
+    </footer>
+    
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="termsLabel">이용약관</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+          </div>
+          <div class="modal-body" style="white-space: pre-wrap; font-size: 0.6rem;">
+[이용약관] - 나만의 밈 창작소
+최종 업데이트일: 2025년 4월 8일
+
+안녕하세요, 나만의 밈 창작소를 이용해주셔서 감사합니다! 아래는 우리 서비스를 보다 안전하고 즐겁게 이용하기 위한 약속입니다.
+
+1. 서비스 소개
+“나만의 밈 창작소”는 사용자가 밈 이미지를 만들고, 공유하며, 커뮤니티에서 소통할 수 있는 플랫폼입니다.
+
+2. 회원 가입 및 이용 조건
+회원 가입 시 이메일 또는 소셜 로그인 정보가 필요할 수 있습니다.
+
+3. 사용자 콘텐츠에 대한 책임
+사용자가 업로드하는 모든 이미지, 텍스트, 댓글 등의 콘텐츠는 본인의 책임하에 게시됩니다. 저작권 침해, 명예훼손, 불법 콘텐츠 등은 게시가 제한되며, 문제 발생 시 해당 유저가 법적 책임을 집니다. 서비스 운영 및 홍보를 위해 업로드한 콘텐츠를 서비스 내에서 사용할 수 있는 비독점적 사용권을 허용해주셔야 합니다.
+
+4. 커뮤니티 이용 수칙
+욕설, 혐오, 스팸, 사기성 게시물은 금지입니다. 운영자는 부적절한 콘텐츠를 삭제하거나, 계정을 제한할 수 있습니다.
+
+5. 서비스 운영 및 면책
+시스템 점검, 업데이트, 외부 문제로 인해 서비스가 일시 중지될 수 있습니다. 업로드된 콘텐츠에 대한 모든 법적 책임은 게시자에게 있습니다.
+
+6. 약관 변경 안내
+약관이 변경될 경우, 커뮤니티 공지사항 또는 이메일을 통해 알려드립니다. 변경된 약관에 동의하지 않을 경우, 회원 탈퇴를 요청하실 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="pravacyLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="privacyLabel">개인정보처리방침</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+          </div>
+          <div class="modal-body" style="white-space: pre-wrap; font-size: 0.6rem;">
+[개인정보처리방침] - 나만의 밈 창작소
+최종 업데이트일: 2025년 4월 7일
+
+나만의 밈 창작소는 여러분의 개인정보를 소중하게 다루고, 투명하게 사용합니다. 아래 내용을 꼭 확인해주세요!
+
+1. 수집하는 개인정보 항목
+회원가입 시: 이메일, 닉네임, 프로필 사진 등
+서비스 이용 시: 접속 로그, 이미지 업로드, 댓글 등
+선택적: 사용자 제공 이미지, 피드백
+
+2. 개인정보 수집 목적
+계정 생성 및 로그인 관리
+밈 제작, 커뮤니티 활동, 고객 문의 대응
+부정 이용 방지 및 법적 의무 이행
+
+3. 보관 기간
+회원 탈퇴 시 즉시 파기 (단, 법령에 따라 일정 기간 보관될 수 있음)
+커뮤니티 게시글 및 댓글은 탈퇴 후에도 서비스 운영 목적상 일정 기간 보관될 수 있음
+
+4. 개인정보의 제3자 제공
+기본적으로 외부에 제공하지 않으며, 제공 시에는 별도 동의를 받습니다.
+
+5. 쿠키와 추적 기술
+사이트 개선을 위한 쿠키 및 분석 도구(Google Analytics 등)가 사용될 수 있습니다.
+원치 않을 경우 브라우저 설정에서 쿠키 수집을 차단할 수 있습니다.
+
+6. 이용자의 권리
+언제든지 자신의 개인정보를 열람, 수정, 삭제 요청할 수 있습니다.
+개인정보 관련 문의는 support@my-meme-lab.com 으로 연락해주세요.
+
+7. 보안 조치
+비밀번호 및 주요 정보는 암호화되어 저장됩니다.
+관리자 외 접근 제한 및 정기적인 보안 점검을 진행합니다.            
+          </div>
+        </div>
+      </div>
+    </div>
 
      <!-- ✅ Bootstrap JS (선택사항) -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
