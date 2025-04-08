@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-3">
+
+  <!-- 🔹 소개 문구 -->
+  <div class="text-center my-4">
+    <h5 class="fw-bold mb-2 text-dark">내가 찜한 밈 템플릿</h5>
+    <p class="text-muted small">
+      자주 사용하는 템플릿은 여기서 바로 접근할 수 있어요.
+    </p>
+  </div>
+  
+
+  <div class="row">
+    {% if favorites %}
+      {% for category in favorites %}
+        <div class="col-md-4 mb-4 text-center">
+          <a href="/{{ category.slug }}/">
+            <img src="{% static category.image %}" class="img-fluid rounded shadow-sm" style="max-height: 150px;">
+            <h5 class="mt-2">{{ category.name }}</h5>
+          </a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-center text-muted">아직 찜한 밈 템플릿이 없습니다.</p>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

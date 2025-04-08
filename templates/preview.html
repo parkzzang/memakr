@@ -3,7 +3,22 @@
 <main class="container my-3">
 
   <!-- 제목 -->
-  <h4 class="mb-2 text-center">{{ title }}</h4>
+  <h4 class="mb-2 text-center">
+    {{ title }}
+    {% if user.is_authenticated %}
+      <form action="{% url 'main:toggle_favorite' slug=slug %}" method="POST" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link p-0 align-middle">
+          {% if is_favorited %}
+            <i class="bi bi-hand-thumbs-up-fill text-primary" style="font-size: 1.5rem;"></i>
+          {% else %}
+            <i class="bi bi-hand-thumbs-up text-secondary" style="font-size: 1.5rem;"></i>
+          {% endif %}
+        </button>
+      </form>
+    {% endif %}
+  </h4>
+  
 
   <!-- 템플릿 → 예시 이미지 (with Bootstrap 아이콘) -->
   <div class="row justify-content-center align-items-center gx-2 gy-2 text-center mb-3">

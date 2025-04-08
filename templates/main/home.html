@@ -3,9 +3,12 @@
 {% block content %}
 <div class="container my-3">
   <!-- 🔹 소개 문구 -->
-  <p class="text-center text-muted small mb-4">
-    간단하게 나만의 밈 이미지를 창작하세요. <br>이미지와 문구만 입력하면 끝입니다.
-  </p>
+  <div class="text-center my-4">
+    <h5 class="fw-bold mb-2 text-dark">간단한 밈 템플릿</h5>
+    <p class="text-muted small">
+      문구나 이미지를 추가하여 나만의 밈 이미지를 만드세요.
+    </p>
+  </div>
   <div class="row">
     {% for category in meme_menu %}
       <div class="col-md-4 mb-4 text-center">

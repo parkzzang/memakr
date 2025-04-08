@@ -1,6 +1,6 @@
 from django import forms
 
-class ImageForm(forms.Form):
+class WoofForm(forms.Form):
     text = forms.CharField(
         max_length=100,
         required=False,

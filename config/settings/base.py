@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'dragon',
     'community',
     'ddal',
+    'common',
 ]
 
 MIDDLEWARE = [

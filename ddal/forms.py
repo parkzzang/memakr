@@ -1,6 +1,6 @@
 from django import forms
 
-class ImageForm(forms.Form):
+class DdalForm(forms.Form):
     text_1 = forms.CharField(
         max_length=100,
         required=False,

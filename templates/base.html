@@ -133,43 +133,51 @@
       </div>
   
   
-      <!-- 네비게이션 링크 -->
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <!-- 밈 템플릿 -->
-          <!-- 💻 데스크탑: 드롭다운 -->
-          <li class="nav-item dropdown d-none d-lg-block position-relative" id="hoverDropdown">
-            <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" role="button" id="memeDropdown">
-              🎨 밈 템플릿
-            </a>
-            <ul class="dropdown-menu mt-1 shadow" style="top: 100%; left: 0;">
-              {% for item in meme_menu %}
-                <li><a class="dropdown-item" href="/{{ item.slug }}/">{{ item.emoji }} {{ item.name }}</a></li>
-              {% endfor %}
-            </ul>
-          </li>
-          
+<!-- 네비게이션 링크 -->
+<div class="collapse navbar-collapse" id="mainNav">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        
-          <!-- 📱 모바일: 펼쳐진 링크 -->
-          <li class="nav-item d-block d-lg-none text-white fw-semibold">
-            <span class="nav-link text-white fw-bold">🎨 밈 템플릿</span>
-          </li>
-          {% for item in meme_menu %}
-          <li class="nav-item d-block d-lg-none">
-            <a class="nav-link text-white ps-4" href="/{{ item.slug }}/">
+    <!-- 💻 데스크탑: 드롭다운 -->
+    <li class="nav-item dropdown d-none d-lg-block position-relative" id="hoverDropdown">
+      <a class="nav-link dropdown-toggle fw-semibold text-white" href="/" role="button" id="memeDropdown">
+        🎨 밈 템플릿
+      </a>
+      <ul class="dropdown-menu mt-1 shadow" style="top: 100%; left: 0;">
+        {% for item in meme_menu %}
+          <li>
+            <a class="dropdown-item {% if request.path == '/'|add:item.slug|add:'/' %}text-secondary{% endif %}"
+               href="/{{ item.slug }}/">
               {{ item.emoji }} {{ item.name }}
             </a>
           </li>
-          {% endfor %}
+        {% endfor %}
+      </ul>
+    </li>
 
-          <!-- 일반 메뉴 -->
-          <li class="nav-item">
-            <a class="nav-link text-white fw-semibold" href="/">🌐 메인</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white fw-semibold" href="/community/">👥 커뮤니티</a>
-          </li>
+    <!-- 📱 모바일: 펼쳐진 메뉴 -->
+    <li class="nav-item d-block d-lg-none text-white fw-semibold">
+      <a class="nav-link text-white fw-bold" href="/">🎨 밈 템플릿</a>
+    </li>
+    {% for item in meme_menu %}
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link ps-4 {% if request.path == '/'|add:item.slug|add:'/' %}text-secondary{% else %}text-white{% endif %}"
+           href="/{{ item.slug }}/">
+          {{ item.emoji }} {{ item.name }}
+        </a>
+      </li>
+    {% endfor %}
+
+    <!-- 일반 메뉴들 -->
+    <li class="nav-item">
+      <a class="nav-link fw-semibold {% if request.path == '/' %}text-secondary{% else %}text-white{% endif %}"
+         href="/">🌐 메인</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link fw-semibold {% if request.path|slice:":10" == "/community" %}text-secondary{% else %}text-white{% endif %}"
+         href="/community/">👥 커뮤니티</a>
+    </li>
+  </ul>
+
                   
         </ul>
       
@@ -177,19 +185,31 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link text-white fw-semibold" href="{% url 'main:logout' %}">
-                {{ user.username }} (로그아웃)
+              <a class="nav-link fw-semibold {% if request.resolver_match.url_name == 'my_favorites' %}text-secondary{% else %}text-white{% endif %}"
+                 href="{% url 'main:my_favorites' %}">
+                찜한 밈
               </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white fw-semibold" href="{% url 'main:logout' %}">로그아웃</a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link text-white fw-semibold" href="{% url 'main:login' %}">로그인</a>
-            </li>
+              <a class="nav-link fw-semibold {% if request.resolver_match.app_name == 'main' and request.resolver_match.url_name == 'login' %}text-secondary{% else %}text-white{% endif %}"
+                 href="{% url 'main:login' %}">
+                로그인
+              </a>
+            </li>          
             <li class="nav-item">
-              <a class="nav-link text-white fw-semibold" href="{% url 'main:signup' %}">회원가입</a>
-            </li>
+              <a class="nav-link fw-semibold {% if request.resolver_match.app_name == 'main' and request.resolver_match.url_name == 'signup' %}text-secondary{% else %}text-white{% endif %}"
+                 href="{% url 'main:signup' %}">
+                회원가입
+              </a>
+            </li>  
+            
           {% endif %}
         </ul>
+        
       </div>
 
       <!-- 언어 선택 -->

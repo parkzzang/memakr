@@ -3,6 +3,8 @@
 from PIL import Image, ImageDraw, ImageFont
 import uuid
 from datetime import datetime
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 def generate_unique_filename():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
