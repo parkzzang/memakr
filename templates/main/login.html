@@ -1,23 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container my-3">
-    <form method="post" action="{% url 'main:login' %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">  
-        {% include "form_errors.html" %}
+<div class="container my-5" style="max-width: 480px;">
 
-        <div class="mb-3">
-            <label for="username">아이디</label>
-            <input type="text" class="form-control" name="username" id="username"
-                   value="{{ form.username.value|default_if_none:'' }}">
-        </div>
-        <div class="mb-3">
-            <label for="password">비밀번호</label>
-            <input type="password" class="form-control" name="password" id="password"
-                   value="{{ form.password.value|default_if_none:'' }}">
-        </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
-    </form>
+  <!-- 제목 -->
+  <h3 class="text-center mb-4 fw-bold text-dark">로그인</h3>
+
+  <form method="post" action="{% url 'main:login' %}" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% include "form_errors.html" %}
+
+    <!-- 아이디 입력 -->
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" name="username" id="username"
+             value="{{ form.username.value|default_if_none:'' }}" placeholder="아이디" required>
+      <label for="username">아이디</label>
+    </div>
+
+    <!-- 비밀번호 입력 + 보기 아이콘 -->
+    <div class="form-floating mb-4 position-relative">
+      <input type="password" class="form-control" name="password" id="password"
+             value="{{ form.password.value|default_if_none:'' }}" placeholder="비밀번호" required>
+      <label for="password">비밀번호</label>
+      <i class="bi bi-eye-slash toggle-password" data-target="password"
+         style="position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); cursor: pointer;"></i>
+    </div>
+
+    <!-- 로그인 버튼 -->
+    <button type="submit" class="btn btn-primary w-100 py-2 mb-2" style="background-color: #4B0082; color: white;">
+      로그인
+    </button>
+
+    <!-- 회원가입 버튼 -->
+    <a href="{% url 'main:signup' %}" class="btn btn-outline-secondary w-100">
+      회원가입
+    </a>
+  </form>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.querySelectorAll(".toggle-password").forEach(icon => {
+  icon.addEventListener("click", function () {
+    const input = document.getElementById(this.dataset.target);
+    const type = input.getAttribute("type") === "password" ? "text" : "password";
+    input.setAttribute("type", type);
+    this.classList.toggle("bi-eye");
+    this.classList.toggle("bi-eye-slash");
+  });
+});
+</script>
 {% endblock %}
