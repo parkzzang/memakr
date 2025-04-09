@@ -181,7 +181,7 @@
 
     <!-- 📱 모바일: 펼쳐진 메뉴 -->
     <li class="nav-item d-block d-lg-none text-white fw-semibold">
-      <a class="nav-link text-white fw-bold" href="/">🎨 밈 템플릿</a>
+      <a class="nav-link text-white fw-bold" href="/">{% trans "🎨 밈 템플릿" %}</a>
     </li>
     {% for item in meme_menu %}
       <li class="nav-item d-block d-lg-none">
@@ -195,11 +195,11 @@
     <!-- 일반 메뉴들 -->
     <li class="nav-item">
       <a class="nav-link fw-semibold text-white"
-         href="/">🌐 메인</a>
+         href="/">{% trans "🌐 메인" %}</a>
     </li>
     <li class="nav-item">
       <a class="nav-link fw-semibold {% if request.path|slice:":10" == "/community" %}text-secondary{% else %}text-white{% endif %}"
-         href="/community/">👥 커뮤니티</a>
+         href="/community/">{% trans "👥 커뮤니티" %}</a>
     </li>
   </ul>
 
@@ -212,23 +212,23 @@
             <li class="nav-item">
               <a class="nav-link fw-semibold {% if request.resolver_match.url_name == 'my_favorites' %}text-secondary{% else %}text-white{% endif %}"
                  href="{% url 'main:my_favorites' %}">
-                찜한 밈
+                 {% trans "찜한 밈" %}
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white fw-semibold" href="{% url 'main:logout' %}">로그아웃</a>
+              <a class="nav-link text-white fw-semibold" href="{% url 'main:logout' %}">{% trans "로그아웃" %}</a>
             </li>
           {% else %}
             <li class="nav-item">
               <a class="nav-link fw-semibold {% if request.resolver_match.app_name == 'main' and request.resolver_match.url_name == 'login' %}text-secondary{% else %}text-white{% endif %}"
                  href="{% url 'main:login' %}">
-                로그인
+                 {% trans "로그인" %}
               </a>
             </li>          
             <li class="nav-item">
               <a class="nav-link fw-semibold {% if request.resolver_match.app_name == 'main' and request.resolver_match.url_name == 'signup' %}text-secondary{% else %}text-white{% endif %}"
                  href="{% url 'main:signup' %}">
-                회원가입
+                 {% trans "회원가입" %}
               </a>
             </li>  
             
@@ -256,8 +256,8 @@
     <!-- 6. 푸터 -->
     <footer class="container text-center py-4 mt-5 border-top">
       <div class="policy-links mb-2" style="font-size: 0.5rem;">
-        <a href="#" class="text-muted me-2" data-bs-toggle="modal" data-bs-target="#termsModal">이용약관</a> |
-        <a href="#" class="text-muted mx-2" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보처리방침</a>
+        <a href="#" class="text-muted me-2" data-bs-toggle="modal" data-bs-target="#termsModal">{% trans "이용약관" %}</a> |
+        <a href="#" class="text-muted mx-2" data-bs-toggle="modal" data-bs-target="#privacyModal">{% trans "개인정보처리방침" %}</a>
       </div>
       <div class="dev-info text-muted" style="font-size: 0.5rem;">
         &copy; 2025 나만의 밈 창작소. All rights reserved.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-09 15:57+0900\n"
+"POT-Creation-Date: 2025-04-09 21:16+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,64 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\templates\base.html:123 .\templates\base.html:149
 #: .\templates\base.html:156
 msgid "나만의 밈 창작소"
 msgstr "My Meme Maker"
 
-#: .\templates\base.html:168
+#: .\templates\base.html:168 .\templates\base.html:184
 msgid "🎨 밈 템플릿"
-msgstr "🎨 Meme Templates"
+msgstr "🎨 Templates"
+
+#: .\templates\base.html:198
+msgid "🌐 메인"
+msgstr "🌐 Main"
+
+#: .\templates\base.html:202
+msgid "👥 커뮤니티"
+msgstr "👥 Community"
+
+#: .\templates\base.html:215
+msgid "찜한 밈"
+msgstr "Your memes "
+
+#: .\templates\base.html:219
+msgid "로그아웃"
+msgstr "Logout"
+
+#: .\templates\base.html:225
+msgid "로그인"
+msgstr "Login"
+
+#: .\templates\base.html:231
+msgid "회원가입"
+msgstr "Signup"
+
+#: .\templates\base.html:259
+msgid "이용약관"
+msgstr "Terms and Conditions of Use"
+
+#: .\templates\base.html:260
+msgid "개인정보처리방침"
+msgstr "Personal Information Processing Policy"
+
+#: .\templates\main\home.html:8
+msgid "간단한 밈 템플릿"
+msgstr "Simply create Meme images from templates"
+
+#: .\templates\main\home.html:10
+msgid "문구나 이미지를 추가하여 나만의 밈 이미지를 만드세요."
+msgstr "Create your own meme images by adding phrases or images."
+
+#: .\templates\main\home.html:29
+msgid ""
+"원하는 밈이 없나요? 커뮤니티에서 템플릿을 요청하거나 공지사항, 이벤트를 확인"
+"하실 수 있습니다."
+msgstr "Do you need another Meme template? "
+"Check out the Community. "
+"You can request templates, check announcements and events."
+
+#: .\templates\main\home.html:32
+msgid "→ 커뮤니티 바로가기"
+msgstr "→ Community"
