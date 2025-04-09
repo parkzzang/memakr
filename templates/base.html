@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!doctype html>
 <html lang="ko">
 <head>
@@ -119,7 +120,7 @@
 </style>
 
     </style>
-    <title>나만의 밈 창작소</title>
+    <title>{% trans "나만의 밈 창작소" %}</title>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
     <link rel="apple-touch-icon" href="{% static 'favicon.ico' %}">
 
@@ -145,14 +146,14 @@
 
     <!-- 제목 (모바일 중앙, 데스크탑 왼쪽) -->
     <a class="navbar-brand fw-bold d-none d-lg-block text-white glow-text" href="/">
-      나만의 밈 창작소
+      {% trans "나만의 밈 창작소" %}
     </a>
     
   
     <!-- 모바일 전용 중앙 제목 -->
     <div class="mobile-title position-absolute top-50 start-50 translate-middle d-block d-lg-none">
         <a class="navbar-brand fw-bold text-white glow-text" href="/" style="font-size: 1.2rem;">
-          나만의 밈 창작소
+          {% trans "나만의 밈 창작소" %}
         </a>
       </div>
   
@@ -164,7 +165,7 @@
     <!-- 💻 데스크탑: 드롭다운 -->
     <li class="nav-item dropdown d-none d-lg-block position-relative" id="hoverDropdown">
       <a class="nav-link dropdown-toggle fw-semibold text-white" href="/" role="button" id="memeDropdown">
-        🎨 밈 템플릿
+        {% trans "🎨 밈 템플릿" %}
       </a>
       <ul class="dropdown-menu mt-1 shadow" style="top: 100%; left: 0;">
         {% for item in meme_menu %}
@@ -237,12 +238,11 @@
       </div>
 
       <!-- 언어 선택 -->
-      <form id="langSelect" class="mobile-title">
-        <select class="form-select-sm w-auto rounded-pill shadow-sm">
-          <option value="ko">한국어</option>
-          <option value="en">English</option>
-          <option value="jp">日本語</option>
-          <option value="zh">中文</option>
+      <form id="langSelect" method="post" action="{% url 'set_language' %}">
+        {% csrf_token %}
+        <select name="language" class="form-select-sm w-auto rounded-pill shadow-sm" onchange="this.form.submit();">
+          <option value="ko" {% if LANGUAGE_CODE == 'ko' %}selected{% endif %}>한국어</option>
+          <option value="en" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
         </select>
       </form>
       
