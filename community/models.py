@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings  # 이건 유지
 
 class Question(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='author_question')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='author_question', null=True)
     subject = models.CharField(max_length=200)
     content = models.TextField()
     create_date = models.DateTimeField()
