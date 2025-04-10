@@ -16,7 +16,7 @@ MEME_MENU = [
     {
         'name': '용 3마리 밈',
         'slug': 'dragon',
-        'image': 'dragon.jpg',
+        'image': 'dragon.png',
         'example': 'dragon_example.png',
     },
     {

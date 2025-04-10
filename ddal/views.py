@@ -7,6 +7,8 @@ from .forms import DdalForm
 from common.utils import (
     generate_unique_filename,
     draw_justified_text_in_box,
+    paste_image_contain,
+    paste_rotated_image
 )
 from common.views_base import meme_index_view
 
@@ -45,28 +47,22 @@ def generate_ddal_image(form):
 
     if image_1:
         try:
-            overlay = Image.open(image_1).convert("RGBA")
-            overlay = ImageOps.exif_transpose(overlay)
-            overlay.thumbnail((150, 150), Image.LANCZOS)
-            base.paste(overlay, (200 - overlay.width // 2, 335 - overlay.height // 2), overlay)
+            box = (118, 257, 268, 381)
+            paste_image_contain(base, image_1, box)
         except Exception as e:
             print(f"image_1 처리 오류: {e}")
 
     if image_2:
         try:
-            overlay = Image.open(image_2).convert("RGBA")
-            overlay = ImageOps.exif_transpose(overlay)
-            overlay.thumbnail((150, 150), Image.LANCZOS)
-            rotated_overlay = overlay.rotate(-20, expand=True)
-            base.paste(rotated_overlay, (850 - overlay.width // 2, 300 - overlay.height // 2), rotated_overlay)
+            paste_rotated_image(base, image_2, center=(829, 281), size=(200, 200), angle=-20)
         except Exception as e:
             print(f"image_2 처리 오류: {e}")
 
     try:
         if text_1:
-            draw_justified_text_in_box(base, text_1, (6, 621, 481, 740), font_path, max_font_size=60, fill='red')
+            draw_justified_text_in_box(base, text_1, (40,575,452,700), font_path, max_font_size=60, fill='red')
         if text_2:
-            draw_justified_text_in_box(base, text_2, (507, 625, 982, 744), font_path, max_font_size=60, fill='red')
+            draw_justified_text_in_box(base, text_2, (500,575,912,700), font_path, max_font_size=60, fill='red')
     except Exception as e:
         print(f"텍스트 처리 오류: {e}")
 

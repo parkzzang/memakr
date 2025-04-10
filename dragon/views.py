@@ -43,7 +43,7 @@ def generate_dragon_image(form):
     image_3 = form.cleaned_data.get('image_3')
 
     # 배경 이미지
-    base_path = os.path.join(settings.BASE_DIR, 'static/dragon.jpg')
+    base_path = os.path.join(settings.BASE_DIR, 'static/dragon.png')
     base = Image.open(base_path).convert('RGBA')
     font_path = os.path.join(settings.BASE_DIR, 'static/fonts/NotoSansKR-ExtraBold.ttf')
 

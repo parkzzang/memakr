@@ -1,6 +1,6 @@
 # common/image_utils.py
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageOps, ImageDraw, ImageFont
 import uuid
 from datetime import datetime
 from django.shortcuts import redirect
@@ -117,3 +117,54 @@ def wrap_text(draw, text, font, max_width):
         if line:
             lines.append(line)
     return lines
+
+def paste_image_contain(base_image, overlay_path, box):
+    """
+    비율을 유지하면서 이미지가 box 안에 최대한 크게 들어가도록 삽입합니다.
+    :param base_image: 붙일 대상 이미지 (PIL.Image)
+    :param overlay_path: 삽입할 이미지 경로 (str)
+    :param box: 삽입할 영역 (x1, y1, x2, y2) tuple
+    """
+    try:
+        overlay = Image.open(overlay_path).convert("RGBA")
+        overlay = ImageOps.exif_transpose(overlay)
+
+        x1, y1, x2, y2 = box
+        box_width = x2 - x1
+        box_height = y2 - y1
+
+        # 이미지 축소 (비율 유지, 자르지 않음)
+        overlay.thumbnail((box_width, box_height), Image.LANCZOS)
+
+        # box 중심 기준 위치 계산
+        paste_x = x1 + (box_width - overlay.width) // 2
+        paste_y = y1 + (box_height - overlay.height) // 2
+
+        base_image.paste(overlay, (paste_x, paste_y), overlay)
+
+    except Exception as e:
+        print(f"이미지 삽입 오류: {e}")
+
+def paste_rotated_image(base_image, overlay_path, center, size=(150, 150), angle=-20):
+    """
+    이미지를 비율 유지하며 축소하고 회전시킨 뒤, 중심 기준으로 base_image에 붙임.
+    :param base_image: 배경 이미지 (PIL.Image)
+    :param overlay_path: 삽입할 이미지 경로 (str)
+    :param center: (x, y) 중심 위치
+    :param size: 축소할 최대 크기 (width, height)
+    :param angle: 회전 각도 (정수)
+    """
+    try:
+        overlay = Image.open(overlay_path).convert("RGBA")
+        overlay = ImageOps.exif_transpose(overlay)
+        overlay.thumbnail(size, Image.LANCZOS)
+
+        rotated = overlay.rotate(angle, expand=True)
+
+        paste_x = center[0] - rotated.width // 2
+        paste_y = center[1] - rotated.height // 2
+
+        base_image.paste(rotated, (paste_x, paste_y), rotated)
+
+    except Exception as e:
+        print(f"회전 이미지 삽입 오류: {e}")
