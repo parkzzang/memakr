@@ -60,9 +60,9 @@ def generate_ddal_image(form):
 
     try:
         if text_1:
-            draw_justified_text_in_box(base, text_1, (40,575,452,700), font_path, max_font_size=60, fill='red')
+            draw_justified_text_in_box(base, text_1, (1,584,464,711), font_path, max_font_size=60, fill='red')
         if text_2:
-            draw_justified_text_in_box(base, text_2, (500,575,912,700), font_path, max_font_size=60, fill='red')
+            draw_justified_text_in_box(base, text_2, (482,584,945,711), font_path, max_font_size=60, fill='red')
     except Exception as e:
         print(f"텍스트 처리 오류: {e}")
 
