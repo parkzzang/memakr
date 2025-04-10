@@ -3,12 +3,6 @@
 {% load i18n %}
 {% block content %}
 <div class="container my-3">
-  <!-- 🔹 소개 문구 -->
-  <div class="text-center my-4">
-    <p class="text-muted small">
-      {% trans "문구나 이미지를 추가하여 간단히 나만의 밈 이미지를 만드세요." %}
-    </p>
-  </div>
   <div class="row">
     {% for category in meme_menu %}
       <div class="col-md-4 mb-4 text-center">
