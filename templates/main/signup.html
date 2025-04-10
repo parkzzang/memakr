@@ -33,13 +33,6 @@
          style="position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); cursor: pointer;"></i>
     </div>
     
-
-    <div class="form-floating mb-4">
-      <input type="email" class="form-control" name="email" id="email"
-             value="{{ form.email.value|default_if_none:'' }}" placeholder="이메일" required>
-      <label for="email">이메일</label>
-    </div>
-
     <div class="form-check mb-2">
       <input class="form-check-input" type="checkbox" id="agreeTerms" name="agree_terms" required>
       <label class="form-check-label" for="agreeTerms">

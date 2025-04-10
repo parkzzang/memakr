@@ -29,6 +29,7 @@ urlpatterns = [
     path('dragon/', include('dragon.urls')),
     path('ddal/', include('ddal.urls')),
     path('i18n/setlang/', set_language, name='set_language'),
+    path('world/', include('world.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

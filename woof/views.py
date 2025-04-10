@@ -64,8 +64,8 @@ def generate_woof_image(form):
 
     if text:
         font_path = os.path.join(settings.BASE_DIR, 'static/fonts/NotoSansKR-ExtraBold.ttf')
-        draw_justified_text_in_box(base, text, (15, 130, 260, 295), font_path, max_font_size=39, fill='black')
-        draw_justified_text_in_box(base, text, (15, 687, 260, 852), font_path, max_font_size=39, fill='black')
+        draw_justified_text_in_box(base, text, (15,144,260,297), font_path, max_font_size=39, fill='black')
+        draw_justified_text_in_box(base, text, (15,700,260,853), font_path, max_font_size=39, fill='black')
 
     filename = generate_unique_filename()
     output_path = os.path.join(settings.MEDIA_ROOT, filename)

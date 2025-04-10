@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'community',
     'ddal',
     'common',
+    'world',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+AUTH_USER_MODEL = 'main.CustomUser'
 
 
 # Password validation

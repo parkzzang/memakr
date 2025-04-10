@@ -71,7 +71,7 @@ msgstr "Create your own meme images by adding phrases or images."
 msgid ""
 "원하는 밈이 없나요? 커뮤니티에서 템플릿을 요청하거나 공지사항, 이벤트를 확인"
 "하실 수 있습니다."
-msgstr "Do you need another Meme template? "
+msgstr "Need another Meme template? "
 "Check out the Community. "
 "You can request templates, check announcements and events."
 

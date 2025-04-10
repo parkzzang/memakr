@@ -40,38 +40,65 @@ def skew_image(image, skew_factor=0.5, direction='horizontal', left=True):
         )
         return padded.transform(padded.size, Image.Transform.AFFINE, coeffs, Image.Resampling.BICUBIC)
 
+from PIL import ImageDraw, ImageFont
 
-def draw_justified_text_in_box(image, text, box, font_path, max_font_size=60, fill='black'):
+def draw_justified_text_in_box(image, text, box, font_path, max_font_size=60, fill='black', align='center'):
     x1, y1, x2, y2 = box
     max_width = x2 - x1
     max_height = y2 - y1
     draw = ImageDraw.Draw(image)
 
+    if not text or not text.strip():
+        return
+
+    font = None
+    lines = []
+    total_height = 0
+
     font_size = max_font_size
-    while font_size > 20:
+    while font_size >= 20:
         font = ImageFont.truetype(font_path, font_size)
         lines = wrap_text(draw, text, font, max_width)
-        line_height = get_line_height(draw, font)
-        total_height = len(lines) * line_height
+
+        if not lines:
+            font_size -= 2
+            continue
+
+        ascent, descent = font.getmetrics()
+        line_height = ascent + descent + 4
+        total_height = line_height * len(lines)
 
         if total_height <= max_height:
             break
-        font_size -= 15
+
+        font_size -= 2
+
+    if not font:
+        font = ImageFont.truetype(font_path, 20)
+        lines = wrap_text(draw, text, font, max_width)
+        ascent, descent = font.getmetrics()
+        line_height = ascent + descent + 4
+        total_height = line_height * len(lines)
 
     y = y1 + (max_height - total_height) // 2
+
     for line in lines:
         line = line.strip()
         if not line:
             continue
         line_width = draw.textlength(line, font=font)
-        x = x1 + (max_width - line_width) // 2
+
+        if align == 'center':
+            x = x1 + (max_width - line_width) // 2
+        elif align == 'left':
+            x = x1
+        elif align == 'right':
+            x = x2 - line_width
+        else:
+            x = x1  # fallback to left
+
         draw.text((x, y), line, font=font, fill=fill)
         y += line_height
-
-
-def get_line_height(draw, font):
-    bbox = draw.textbbox((0, 0), '가', font=font)
-    return bbox[3] - bbox[1] + 8
 
 
 def wrap_text(draw, text, font, max_width):

@@ -25,6 +25,12 @@ MEME_MENU = [
         'image': 'ddal.png',
         'example': 'ddal_example.png',
     },
+    {
+        'name': '세계문학전집 밈',
+        'slug': 'world',
+        'image': 'world.png',
+        'example': 'world_example.png',
+    },
 ]
 
 def get_meme_title(slug):
